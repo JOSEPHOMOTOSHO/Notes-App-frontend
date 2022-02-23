@@ -15,7 +15,7 @@ import {
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import GoogleIcon from "@mui/icons-material/Google";
 import axios from "axios";
-import {useCookies} from 'react-cookie'
+import { useCookies } from "react-cookie";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useHistory } from "react-router-dom";
 import "@fontsource/poppins";
@@ -55,7 +55,7 @@ const useStyles = makeStyles({
   },
   wrapper: {
     backgroundColor: "whitesmoke",
-    height:'900px'
+    height: "900px",
   },
   boxForm: {
     background: "white",
@@ -72,11 +72,14 @@ const SignInForm = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [warningMessage, setWarningMsg] = useState("");
-  const [Id, setId] = useCookies(['UserD'])
+  const [Id, setId] = useCookies(["UserD"]);
+  const [showWarning, setShowWarning] = useState(false);
   const history = useHistory();
 
   function checkLoginDetails() {
-    if (!email && !password) {
+    if (!email) {
+      return false;
+    } else if (!password) {
       return false;
     } else {
       return true;
@@ -87,6 +90,7 @@ const SignInForm = () => {
     event.preventDefault();
     const checker = checkLoginDetails();
     if (!checker) {
+      setShowWarning(true);
       setWarningMsg("Email and Password is Required");
     } else {
       const details = {
@@ -95,28 +99,30 @@ const SignInForm = () => {
       };
       let result;
       try {
+        setShowWarning(false);
         result = await axios({
           method: "POST",
           data: details,
-          withCredentials: true,
-          url: "https://notesxd.herokuapp.com/users/login",
+          // withCredentials: true,
+          url: "https://notesxdapi.herokuapp.com/users/login",
         });
-        
-        let tc = result.data as unknown as {token :string}
+        console.log(result, "hgdw", details, "details");
+        let tc = result.data as unknown as { token: string };
         window.localStorage.setItem("user", JSON.stringify(tc));
-        window.localStorage.setItem('tabHistory', JSON.stringify([]))
-        
-        setId('UserD', tc.token,{
-          maxAge:186400
-        })
-        
-        
+        window.localStorage.setItem("tabHistory", JSON.stringify([]));
+        window.localStorage.setItem("activeFolder", "");
+
+        setId("UserD", tc.token, {
+          maxAge: 186400,
+        });
+
         history.push("/home");
       } catch (err: any) {
-        console.log('problem')
-        console.log(result)
-        // let errorMsg = err.response.data.error || err.response.data.message ;
-        // setWarningMsg(errorMsg);
+        console.log(result, "he2gdw");
+        console.log( "hgdw", details, "details");
+        setShowWarning(true);
+        console.log(err.response.data.error, "ererehgcrer");
+        setWarningMsg(err.response.data.error);
       }
     }
   }
@@ -140,13 +146,65 @@ const SignInForm = () => {
             }}
             className={classes.boxForm}
           >
-            {/* warning message to be refrenced from here */}
-            <h5 style={{ paddingTop: "10px", display: "flex", justifyContent: "center", color: "red", fontSize: "14px",}}>{warningMessage}</h5>
+            {showWarning ? (
+              <h5
+                style={{
+                  paddingTop: "10px",
+                  display: "flex",
+                  justifyContent: "center",
+                  color: "red",
+                  fontSize: "14px",
+                }}
+              >
+                {warningMessage}
+              </h5>
+            ) : (
+              <h5
+                style={{
+                  paddingTop: "10px",
+                  display: "flex",
+                  justifyContent: "center",
+                  color: "#32A05F",
+                  fontSize: "14px",
+                }}
+              >
+                {warningMessage}
+              </h5>
+            )}
             <form className={classes.boxs} onSubmit={signInUser}>
-              <TextField margin="normal" size="small" fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus onChange={(e) => setemail(e.target.value)}/>
-              <TextField margin="normal" size="small" fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" onChange={(e) => setpassword(e.target.value)}/>
-              <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me"/>
-              <Button type="submit" fullWidth variant="contained" style={{ backgroundColor: "#32A05F" }} sx={{ mt: 3, mb: 2 }}>
+              <TextField
+                margin="normal"
+                size="small"
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={(e) => setemail(e.target.value)}
+              />
+              <TextField
+                margin="normal"
+                size="small"
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={(e) => setpassword(e.target.value)}
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                style={{ backgroundColor: "#32A05F" }}
+                sx={{ mt: 3, mb: 2 }}
+              >
                 SIGN IN
               </Button>
               <span style={{ textAlign: "center", marginBottom: "20px" }}>
@@ -157,13 +215,13 @@ const SignInForm = () => {
                 Sign in with Social Networks
               </div>
               <div>
-                <a href="https://notesxd.herokuapp.com/auth/facebook">
+                <a href="https://notesxdapi.herokuapp.com/auth/facebook">
                   <FacebookRoundedIcon
                     sx={{ width: "30px", height: "30px" }}
                     style={{ color: "#32A05F" }}
                   />
                 </a>
-                <a href="https://notesxd.herokuapp.com/auth/google/">
+                <a href="https://notesxdapi.herokuapp.com/auth/google/">
                   <GoogleIcon
                     sx={{ width: "30px", height: "30px" }}
                     style={{ color: "#32A05F" }}
@@ -192,4 +250,3 @@ const SignInForm = () => {
 };
 
 export default SignInForm;
-

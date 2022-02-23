@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import '@fontsource/noto-sans'
 import '@fontsource/poppins'
+import { useHistory } from "react-router-dom";
+
 const useStyles = makeStyles({
     wrapper:{
         display:'flex',
@@ -35,13 +37,21 @@ const useStyles = makeStyles({
 })
 const Hero = () => {
     const classes = useStyles();
+    const history = useHistory();
+
+
+    function handleSubmit(event:any) {
+      event.preventDefault()
+      history.push("/login")
+    }
+
     return (
         <>
           <div className={classes.wrapper}>
               <div className={classes.hero_text}>
                <p className={classes.hero_textA}>Notes.XD is a place to write, read, and connect</p>
                <p className={classes.hero_textB}>It's easy and free to post your thinking on any topic and connect with millions of readers.</p>
-               <button style={{padding:'10px', border:'none', outline:'none', fontSize:'17px', background:'#32A05F', color:'white', cursor:'pointer', borderRadius:'50px'}}>
+               <button style={{padding:'10px', border:'none', outline:'none', fontSize:'17px', background:'#32A05F', color:'white', cursor:'pointer', borderRadius:'50px'}}  onClick={(e)=>handleSubmit(e)}>
                    Start Writing
                </button>
               </div>

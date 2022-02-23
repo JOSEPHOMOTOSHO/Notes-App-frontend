@@ -31,6 +31,10 @@ export default function EachNote(props:NotesDetails) {
     let bod = {...props}.body
     let newBod = bod.substring(0,1).toLocaleUpperCase() + bod.substring(1, bod.length-1)
     let displayTags
+    let rem = 0
+    if(props.tags.length > 4 ){
+        rem = props.tags.length - 3
+    }
     if(props.tags.length === 0){
         displayTags = ['Tags', 'Tags', 'Tags']
     }else{
@@ -52,7 +56,7 @@ export default function EachNote(props:NotesDetails) {
             <h3 className="note-title">{props.title}</h3>
             <p className="note-body">{(newBod.trim().split('').length === 0) ? 'No description yet' : newBod.replace( /(<([^>]+)>)/ig, '').substring(0,57)}{(newBod.replace( /(<([^>]+)>)/ig, '').length > 57) ? ('...'): ('')}</p>
             <div className="note-tags">
-                {displayTags.map((val)=>(<p className="tag">#{val.toUpperCase()}</p>))}
+                   {displayTags.slice(0,3).map((val)=>(<p className="tag">#{val.toUpperCase()}</p>))} <p style={{padding:"3px 4px", fontSize:"11px"}}>{(rem>0) ? `+${rem}` : ''}</p>
             </div>
         </div>
         </>

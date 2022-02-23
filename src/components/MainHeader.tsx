@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@mui/styles';
 import '@fontsource/noto-sans'
 import '@fontsource/poppins'
+import { useHistory } from "react-router-dom";
 const useStyles = makeStyles({
     wrapper:{
         display:'flex',
@@ -54,6 +55,7 @@ const useStyles = makeStyles({
       }
 })
 const MainHeader = () => {
+  const history = useHistory();
     const tname = 'notes'
     const classes = useStyles();
     return (
@@ -61,10 +63,10 @@ const MainHeader = () => {
          <div className={classes.wrapper}>
               <h3 className={classes.logo}>{tname}<span className={classes.xd}>.xd</span></h3> 
               <div className={classes.header_nav}>
-                   <p className={classes.nav}>Our Story</p>
+                   {/* <p className={classes.nav}>Our Story</p>
                    <p className={classes.nav}>Write</p>
-                   <p className={classes.nav}>Sign In</p>
-                   <p className={classes.navX}>Get Started</p>
+                   <p className={classes.nav}>Sign In</p> */}
+                   <p className={classes.navX} onClick={()=>{history.push("/login")}}>Get Started</p>
               </div>
         </div>       
         </>

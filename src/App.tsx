@@ -6,6 +6,7 @@ import SignUpForm from './components/Signup'
 import SignInForm from './components/SignIn';
 import EmailInput from './components/EmailInput';
 import NewPassword  from './components/NewPassword';
+import Notesmanin  from './components/NotesMain';
 import NotesPage from './components/ViewNote';
 import Profile  from './components/Profile';
 import MainPage  from './components/Mainpage';
@@ -27,8 +28,8 @@ const  pus = ()=>{
     <div className="App">
       <Router>
         <Switch>
-          <Route path='/viewnotes/:id'>
-            <NotesPage />
+          <Route path='/notes/:id'>
+            <Notesmanin />
           </Route>
           <Route path='/'  exact>
             <MainPage />
