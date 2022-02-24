@@ -2,7 +2,7 @@ import React from 'react'
 import { makeStyles } from '@mui/styles';
 import { borderLeft } from '@mui/system';
 import TextEditor from './TextEditor';
-import UpperScroll from './Upperscroll'
+import UpperScroll from './UpperscrollTab'
 
 const useStyles = makeStyles({
     scrollWrapper:{

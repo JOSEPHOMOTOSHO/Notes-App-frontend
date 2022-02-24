@@ -7,7 +7,7 @@ import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import UpperScroll from "./Upperscroll";
+import UpperScroll from "./UpperscrollTab";
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
