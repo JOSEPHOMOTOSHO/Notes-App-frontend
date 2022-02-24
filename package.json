@@ -25,6 +25,7 @@
     "dotenv": "^10.0.0",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
+    "express": "^4.17.3",
     "html-to-draftjs": "^1.5.0",
     "interweave": "^12.9.0",
     "jsonwebtoken": "^8.5.1",
@@ -41,8 +42,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "postinstall":"tsc",
+    "start": "node server.js",
+    "postinstall": "tsc",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
