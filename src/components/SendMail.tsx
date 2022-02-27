@@ -126,7 +126,7 @@ export default function SendMail() {
     console.log(link);
     setAnchorEl(event.currentTarget);
     const token = await jwt.sign(general, "secret", { expiresIn: "24h" });
-    let Notelink = `http://localhost:3000/viewnotes/${token}`;
+    let Notelink = `http://xdnotes.herokuapp.com/viewnotes/${token}`;
     setLink(Notelink);
   };
   return (
