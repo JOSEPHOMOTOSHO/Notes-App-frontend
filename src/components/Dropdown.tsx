@@ -137,7 +137,7 @@ export default function LongMenu() {
     setOpen(true);
   };
   const handleCopy = () => {
-    copy(`http://localhost:3000/notes/${onEdit}`);
+    copy(`http://xdnotes.herokuapp.com/notes/${onEdit}`);
     setMsg("Link Copied sucessfully!");
     setOpen(true);
   };
