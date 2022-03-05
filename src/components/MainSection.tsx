@@ -89,7 +89,6 @@ const MainSection = () => {
     };
     getNotes();
   }, []);
-
   const classes = useStyles();
   return (
     <>
@@ -115,17 +114,19 @@ const MainSection = () => {
             Last Updated
           </h3>
         </div>
-        <div className={classes.section_items}>
-          {result?.map((el: any, index: any) => (
+        {(result.length > 0) ? (<div className={classes.section_items}>
+          {result?.map((el: any, index: any) => {
+
+            return(
             <div className={classes.section_box} key={index}>
               <div className={classes.avatar}>
                 <Avatar
                   alt="Travis Howard"
-                  src={el.createdBy.avatar}
+                  src={el.createdBy?.avatar || ""}
                   sx={{ width: "35px", height: "35px" }}
                   style={{ marginRight: "10px" }}
                 />
-                <p>{`${el.createdBy.firstName} ${el.createdBy.lastName}`}</p>
+                <p>{`${el.createdBy?.firstName || ""} ${el.createdBy?.lastName || ""}`}</p>
               </div>
               <div className={classes.section_text}>
                 <h3
@@ -164,8 +165,8 @@ const MainSection = () => {
                 )} ${x}`}</p>
               </div>
             </div>
-          ))}
-        </div>
+          )})}
+        </div>) : ( <></>)}
       </div>
     </>
   );
