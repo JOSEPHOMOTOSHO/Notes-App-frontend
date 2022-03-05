@@ -66,12 +66,14 @@ const useStyles = makeStyles({
     padding: "15px 0px",
     marginLeft: "30px",
     borderRadius: "30px 0 0 30px",
+    cursor: "pointer"
   },
   note: {},
   menu_items: {
     marginLeft: "10px",
     fontSize: "14px",
     fontFamily: "source-sans-pro",
+    cursor: "pointer"
   },
   menu_subitems: {
     padding: "10px 0",
