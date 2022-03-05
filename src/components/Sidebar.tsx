@@ -15,9 +15,12 @@ import AddIcon from "@mui/icons-material/Add";
 const useStyles = makeStyles({
   sidebarWrapper: {
     flex: "15%",
-    height: "100vh",
+    height: "92vh",
+    overflow:"scroll",
+    // position:"fixed",
     width: "100%",
     backgroundColor: "#F4F4F4",
+    // backgroundColor: "red",
     position: "relative",
   },
   profile: {
@@ -309,6 +312,7 @@ const Sidebar: FC<{ toggleModal: Function }> = (props) => {
   return (
     <>
       <div className={classes.sidebarWrapper}>
+        <div  style={{ height: "72vh", overflow: "scroll", }}>
         <div className={classes.profile}>
           <Avatar
             alt="Remy Sharp"
@@ -396,6 +400,7 @@ const Sidebar: FC<{ toggleModal: Function }> = (props) => {
               </div>
             );
           })}
+        </div>
         </div>
         <div>
           <div
